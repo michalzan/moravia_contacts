@@ -28,11 +28,9 @@ public class Controller {
     @FXML private TableView<Contact> tableView;
 
     private Contact selection;
-    private ObservableList<Contact> data;
 
     @FXML
     public void initialize() {
-        data = tableView.getItems();
         tableView.setOnMouseClicked((MouseEvent event) -> {
 
             if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -57,11 +55,11 @@ public class Controller {
         }
     }
 
-    private void openDialog(Contact selection) throws Exception{
+    private void openDialog(Contact selection) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/dialog.fxml"));
         Parent parent = fxmlLoader.load();
         DialogController dialogController = fxmlLoader.getController();
-        dialogController.setData(data, selection);
+        dialogController.setData(tableView.getItems(), selection);
 
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
